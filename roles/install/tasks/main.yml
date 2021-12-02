@@ -1,0 +1,13 @@
+---
+- name: Install git+https://github.com/vmware/vsphere-automation-sdk-python.git
+  pip:
+    name: git+https://github.com/vmware/vsphere-automation-sdk-python.git
+    extra_args: --upgrade
+  tags:
+    - sdk
+  
+- name: Install pyvmomi
+  pip:
+    name: pyvmomi
+  tags:
+    - pyvmomi

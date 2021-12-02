@@ -1,0 +1,6 @@
+---
+- name: Install dependency
+  roles:
+    - install
+  tags:
+    - install
