@@ -1,4 +1,11 @@
 ---
+- name: Upgrade pip and setuptools
+  pip:
+    name:
+      - pip
+      - setuptools
+    extra_args: --upgrade
+
 - name: Install git+https://github.com/vmware/vsphere-automation-sdk-python.git
   pip:
     name: git+https://github.com/vmware/vsphere-automation-sdk-python.git
