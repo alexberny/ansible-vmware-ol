@@ -1,6 +1,6 @@
 ---
 - name: Upgrade pip and setuptools
-  become: true
+  become: yes
   pip:
     name:
       - pip
