@@ -1,5 +1,6 @@
 ---
 - name: Install dependency
+  hosts: localhost
   roles:
     - install
   tags:
