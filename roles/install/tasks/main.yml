@@ -5,6 +5,9 @@
       - pip
       - setuptools
     extra_args: --upgrade --user
+    tags:
+      - sdk
+      - pyvmomi
 
 - name: Install git+https://github.com/vmware/vsphere-automation-sdk-python.git
   pip:
