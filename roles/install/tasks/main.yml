@@ -1,22 +1,19 @@
 ---
 - name: Upgrade pip and setuptools
-  become: yes
   pip:
     name:
       - pip
       - setuptools
-    extra_args: --upgrade
+    extra_args: --upgrade --user
 
 - name: Install git+https://github.com/vmware/vsphere-automation-sdk-python.git
-  become: yes
   pip:
     name: git+https://github.com/vmware/vsphere-automation-sdk-python.git
-    extra_args: --upgrade
+    extra_args: --upgrade --user
   tags:
     - sdk
   
 - name: Install pyvmomi
-  become: yes
   pip:
     name: pyvmomi
   tags:
