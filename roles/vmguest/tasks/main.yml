@@ -1,22 +1,36 @@
 ---
-- name: Get VM "{{ vm_name }}" uuid
-  vmware_guest_info:
+- name: Get VM "{{ vm_name }}" folder path
+  vmware_guest_find:
     hostname: "{{ vcenter_server }}"
     username: "{{ vcenter_user }}"
     password: "{{ vcenter_pass }}"
     validate_certs: False
-    datacenter: "{{ datacenter }}"
-    folder: "/{{datacenter}}/vm"
     name: "{{ vm_name }}"
-  register: vm_facts
-  tags: uuid
-
-- name: Restart VM "{{ vm_name }}"
-  vmware_guest:
-    hostname: "{{ vcenter_server }}"
-    username: "{{ vcenter_user }}"
-    password: "{{ vcenter_pass }}"
-    datacenter: "{{ datacenter }}"
-    state: poweredoff
   delegate_to: localhost
-  tags: restart
+  register: vm_folder
+  tags: folder
+  
+
+# - name: Get VM "{{ vm_name }}" uuid
+#   vmware_guest_info:
+#     hostname: "{{ vcenter_server }}"
+#     username: "{{ vcenter_user }}"
+#     password: "{{ vcenter_pass }}"
+#     validate_certs: "{{ validate_certs }}"
+#     datacenter: "{{ datacenter }}"
+#     folder: "/{{datacenter}}/vm"
+#     name: "{{ vm_name }}"
+#   register: vm_facts
+#   tags: uuid
+
+# - name: Restart VM "{{ vm_name }}"
+#   vmware_guest:
+#     hostname: "{{ vcenter_server }}"
+#     username: "{{ vcenter_user }}"
+#     password: "{{ vcenter_pass }}"
+#     validate_certs: "{{ validate_certs }}"
+#     datacenter: "{{ datacenter }}"
+#     uuid: "{{ vm_facts }}"
+#     state: poweredoff
+#   delegate_to: localhost
+#   tags: restart
