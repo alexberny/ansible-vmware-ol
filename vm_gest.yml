@@ -1,6 +1,6 @@
 ---
 - name: get vault
-  include_vars: group-vars/vcenter/vcenter.vmware.yml
+  include_vars: group_vars/vcenter/vcenter.vmware.yml
 
 - name: Install dependency
   hosts: localhost
