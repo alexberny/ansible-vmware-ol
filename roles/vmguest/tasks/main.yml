@@ -12,19 +12,23 @@
 
 - name: Print VM "{{ vm_name }}" folder path
   debug:
-    msg: "{{ vm_folder.folders}}"
+    msg: "{{ vm_folder.folders }}"
 
-# - name: Get VM "{{ vm_name }}" uuid
-#   vmware_guest_info:
-#     hostname: "{{ vcenter_server }}"
-#     username: "{{ vcenter_user }}"
-#     password: "{{ vcenter_pass }}"
-#     validate_certs: "{{ validate_certs }}"
-#     datacenter: "{{ datacenter }}"
-#     folder: "/{{datacenter}}/vm"
-#     name: "{{ vm_name }}"
-#   register: vm_facts
+- name: Get VM "{{ vm_name }}" uuid
+  vmware_guest_info:
+    hostname: "{{ vcenter_server }}"
+    username: "{{ vcenter_user }}"
+    password: "{{ vcenter_pass }}"
+    validate_certs: "{{ validate_certs }}"
+    datacenter: "{{ datacenter }}"
+    folder: "{{ vm_folder.folders}}"
+    name: "{{ vm_name }}"
+  register: vm_facts
 #   tags: uuid
+
+- name: Print VM "{{ vm_name }}" UUID
+  debug:
+    msg: "{{ vm_facts }}"
 
 # - name: Restart VM "{{ vm_name }}"
 #   vmware_guest:
