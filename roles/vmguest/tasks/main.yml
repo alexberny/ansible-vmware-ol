@@ -12,7 +12,7 @@
 
 - name: Print VM "{{ vm_name }}" folder path
   debug:
-    msg: "{{ vm_folder .folders}}"
+    msg: "{{ vm_folder.folders}}"
 
 # - name: Get VM "{{ vm_name }}" uuid
 #   vmware_guest_info:
