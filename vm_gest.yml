@@ -1,6 +1,6 @@
 ---
 - name: Install dependency
   hosts: localhost
-  vars_file: group_vars/vcenter/vcenter.vmware.yml
+  vars_files: group_vars/vcenter/vcenter.vmware.yml
   roles:
     - vmguest
