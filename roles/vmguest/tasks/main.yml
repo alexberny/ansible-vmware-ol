@@ -15,13 +15,13 @@
     msg: "{{ vm_folder.folders }}"
 
 - name: Get VM "{{ vm_name }}" uuid
-  vmware_guest_info:
+  vmware_vm_info:
     hostname: "{{ vcenter_server }}"
     username: "{{ vcenter_user }}"
     password: "{{ vcenter_pass }}"
     validate_certs: "{{ validate_certs }}"
-    datacenter: "{{ datacenter }}"
-    folder: "{{ vm_folder.folders}}"
+    # datacenter: "{{ datacenter }}"
+    # folder: "{{ vm_folder.folders}}"
     name: "{{ vm_name }}"
   register: vm_facts
 #   tags: uuid
