@@ -9,7 +9,10 @@
   delegate_to: localhost
   register: vm_folder
   tags: folder
-  
+
+- name: Print VM "{{ vm_name }}" folder path
+  debug:
+    msg: "{{ vm_folder }}"
 
 # - name: Get VM "{{ vm_name }}" uuid
 #   vmware_guest_info:
