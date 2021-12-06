@@ -2,4 +2,4 @@
 - name: Install dependency
   hosts: localhost
   roles:
-    - wmguest
+    - vmguest
