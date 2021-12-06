@@ -21,7 +21,7 @@
     password: "{{ vcenter_pass }}"
     validate_certs: "{{ validate_certs }}"
     # datacenter: "{{ datacenter }}"
-    folder: "{{ vm_folder.folders}}"
+    folder: "{{ vm_folder.folders }}"
     # name: "{{ vm_name }}"
   register: vm_facts
 #   tags: uuid
