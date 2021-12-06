@@ -1,0 +1,22 @@
+---
+- name: Get VM "{{ vm_name }}" uuid
+  vmware_guest_info:
+    hostname: "{{ vcenter_server }}"
+    username: "{{ vcenter_user }}"
+    password: "{{ vcenter_pass }}"
+    validate_certs: False
+    datacenter: "{{ datacenter }}"
+    folder: "/{{datacenter}}/vm"
+    name: "{{ vm_name }}"
+  register: vm_facts
+  tags: uuid
+
+- name: Restart VM "{{ vm_name }}"
+  vmware_guest:
+    hostname: "{{ vcenter_server }}"
+    username: "{{ vcenter_user }}"
+    password: "{{ vcenter_pass }}"
+    datacenter: "{{ datacenter }}"
+    state: poweredoff
+  delegate_to: localhost
+  tags: restart
