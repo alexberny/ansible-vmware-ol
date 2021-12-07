@@ -30,15 +30,31 @@
 #   debug:
 #     msg: "{{ vm_facts }}"
 
-- name: Restart VM "{{ vm_name }}"
-  vmware_guest:
+# - name: Restart VM "{{ vm_name }}"
+#   vmware_guest:
+#     hostname: "{{ vcenter_server }}"
+#     username: "{{ vcenter_user }}"
+#     password: "{{ vcenter_pass }}"
+#     validate_certs: "{{ validate_certs }}"
+#     # datacenter: "{{ datacenter }}"
+#     # uuid: "{{ vm_facts }}"
+#     name: "{{ vm_name }}"
+#     state: poweredoff
+#   delegate_to: localhost
+# #   tags: restart
+
+- name: Restart "{{ vm_name }}" 
+  vmware_guest_powerstate:
     hostname: "{{ vcenter_server }}"
     username: "{{ vcenter_user }}"
-    password: "{{ vcenter_pass }}"
     validate_certs: "{{ validate_certs }}"
-    # datacenter: "{{ datacenter }}"
-    # uuid: "{{ vm_facts }}"
     name: "{{ vm_name }}"
-    state: poweredoff
+    state: restarted
+    state_change_timeout: 200
   delegate_to: localhost
-#   tags: restart
+  register: restarted_vm
+
+- name: Print VM "{{ vm_name }}" restart status
+  debug:
+    msg: "{{ restarted_vm }}"
+  
