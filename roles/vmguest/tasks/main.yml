@@ -74,9 +74,85 @@
         state: reboot-guest
         state_change_timeout: 200
       delegate_to: localhost
-      register: restarted_vm
+      register: reboot_vm
 
-    - name: Print VM "{{ vm_name }}" restart status
+    - name: Print VM "{{ vm_name }}" reboot status
       debug:
-        msg: "{{ reboot_guest_vm }}"
+        msg: "{{ reboot_vm }}"
   tags: reboot_guest_vm
+
+- name: Powered-off "{{ vm_name }}" 
+  block:
+    - name: Powered-off
+      vmware_guest_powerstate:
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        validate_certs: "{{ validate_certs }}"
+        name: "{{ vm_name }}"
+        state: powered-off
+        state_change_timeout: 200
+      delegate_to: localhost
+      register: poweroff_vm
+
+    - name: Print VM "{{ vm_name }}" power off status
+      debug:
+        msg: "{{ poweroff_vm }}"
+  tags: poweroff_vm
+
+- name: Powered-on "{{ vm_name }}" 
+  block:
+    - name: Powered-on
+      vmware_guest_powerstate:
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        validate_certs: "{{ validate_certs }}"
+        name: "{{ vm_name }}"
+        state: powered-on
+        state_change_timeout: 200
+      delegate_to: localhost
+      register: poweron_vm
+
+    - name: Print VM "{{ vm_name }}" power on status
+      debug:
+        msg: "{{ poweron_vm }}"
+  tags: poweron_vm
+
+- name: Shutdown-guest "{{ vm_name }}" 
+  block:
+    - name: Shutdown-guest
+      vmware_guest_powerstate:
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        validate_certs: "{{ validate_certs }}"
+        name: "{{ vm_name }}"
+        state: shutdown-guest
+      delegate_to: localhost
+      register: shutdown_vm
+
+    - name: Print VM "{{ vm_name }}" power on status
+      debug:
+        msg: "{{ shutdown_vm }}"
+  tags: shutdown_guest_vm
+
+- name: Suspend "{{ vm_name }}" 
+  block:
+    - name: Suspend
+      vmware_guest_powerstate:
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        validate_certs: "{{ validate_certs }}"
+        name: "{{ vm_name }}"
+        state: suspend
+        state_change_timeout: 200
+      delegate_to: localhost
+      register: suspend_vm
+
+    - name: Print VM "{{ vm_name }}" power on status
+      debug:
+        msg: "{{ suspend_vm }}"
+  tags: suspend_vm
+
