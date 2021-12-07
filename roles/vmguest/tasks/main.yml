@@ -1,43 +1,44 @@
 ---
-- name: Get VM "{{ vm_name }}" folder path
-  vmware_guest_find:
-    hostname: "{{ vcenter_server }}"
-    username: "{{ vcenter_user }}"
-    password: "{{ vcenter_pass }}"
-    validate_certs: False
-    name: "{{ vm_name }}"
-  delegate_to: localhost
-  register: vm_folder
-  tags: folder
+# - name: Get VM "{{ vm_name }}" folder path
+#   vmware_guest_find:
+#     hostname: "{{ vcenter_server }}"
+#     username: "{{ vcenter_user }}"
+#     password: "{{ vcenter_pass }}"
+#     validate_certs: False
+#     name: "{{ vm_name }}"
+#   delegate_to: localhost
+#   register: vm_folder
+#   tags: folder
 
-- name: Print VM "{{ vm_name }}" folder path
-  debug:
-    msg: "{{ vm_folder.folders }}"
+# - name: Print VM "{{ vm_name }}" folder path
+#   debug:
+#     msg: "{{ vm_folder.folders }}"
 
-- name: Get VM "{{ vm_name }}" uuid
-  vmware_vm_info:
+# - name: Get VM "{{ vm_name }}" uuid
+#   vmware_vm_info:
+#     hostname: "{{ vcenter_server }}"
+#     username: "{{ vcenter_user }}"
+#     password: "{{ vcenter_pass }}"
+#     validate_certs: "{{ validate_certs }}"
+#     # datacenter: "{{ datacenter }}"
+#     folder: "{{ vm_folder.folders | first}}"
+#     # name: "{{ vm_name }}"
+#   register: vm_facts
+# #   tags: uuid
+
+# - name: Print VM "{{ vm_name }}" UUID
+#   debug:
+#     msg: "{{ vm_facts }}"
+
+- name: Restart VM "{{ vm_name }}"
+  vmware_guest:
     hostname: "{{ vcenter_server }}"
     username: "{{ vcenter_user }}"
     password: "{{ vcenter_pass }}"
     validate_certs: "{{ validate_certs }}"
     # datacenter: "{{ datacenter }}"
-    folder: "{{ vm_folder.folders | first}}"
-    # name: "{{ vm_name }}"
-  register: vm_facts
-#   tags: uuid
-
-- name: Print VM "{{ vm_name }}" UUID
-  debug:
-    msg: "{{ vm_facts }}"
-
-# - name: Restart VM "{{ vm_name }}"
-#   vmware_guest:
-#     hostname: "{{ vcenter_server }}"
-#     username: "{{ vcenter_user }}"
-#     password: "{{ vcenter_pass }}"
-#     validate_certs: "{{ validate_certs }}"
-#     datacenter: "{{ datacenter }}"
-#     uuid: "{{ vm_facts }}"
-#     state: poweredoff
-#   delegate_to: localhost
+    # uuid: "{{ vm_facts }}"
+    name: "{{ vm_name }}"
+    state: poweredoff
+  delegate_to: localhost
 #   tags: restart
