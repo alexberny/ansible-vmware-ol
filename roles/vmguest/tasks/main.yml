@@ -47,6 +47,7 @@
   vmware_guest_powerstate:
     hostname: "{{ vcenter_server }}"
     username: "{{ vcenter_user }}"
+    password: "{{ vcenter_pass }}"
     validate_certs: "{{ validate_certs }}"
     name: "{{ vm_name }}"
     state: restarted
