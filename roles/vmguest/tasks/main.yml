@@ -44,18 +44,39 @@
 # #   tags: restart
 
 - name: Restart "{{ vm_name }}" 
-  vmware_guest_powerstate:
-    hostname: "{{ vcenter_server }}"
-    username: "{{ vcenter_user }}"
-    password: "{{ vcenter_pass }}"
-    validate_certs: "{{ validate_certs }}"
-    name: "{{ vm_name }}"
-    state: restarted
-    state_change_timeout: 200
-  delegate_to: localhost
-  register: restarted_vm
+  block:
+    - name: Restart
+      vmware_guest_powerstate:
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        validate_certs: "{{ validate_certs }}"
+        name: "{{ vm_name }}"
+        state: restarted
+        state_change_timeout: 200
+      delegate_to: localhost
+      register: restarted_vm
 
-- name: Print VM "{{ vm_name }}" restart status
-  debug:
-    msg: "{{ restarted_vm }}"
+    - name: Print VM "{{ vm_name }}" restart status
+      debug:
+        msg: "{{ restarted_vm }}"
+  tags: restart_vm
   
+- name: Reboot guest "{{ vm_name }}" 
+  block:
+    - name: Reboot
+      vmware_guest_powerstate:
+        hostname: "{{ vcenter_server }}"
+        username: "{{ vcenter_user }}"
+        password: "{{ vcenter_pass }}"
+        validate_certs: "{{ validate_certs }}"
+        name: "{{ vm_name }}"
+        state: reboot-guest
+        state_change_timeout: 200
+      delegate_to: localhost
+      register: restarted_vm
+
+    - name: Print VM "{{ vm_name }}" restart status
+      debug:
+        msg: "{{ reboot_guest_vm }}"
+  tags: reboot_guest_vm
